@@ -1,0 +1,26 @@
+.left-align {
+  float:left;
+  text-align:left;
+  width:50%;
+}
+
+.right-align {
+  float:right;
+  text-align:left;
+  width:50%;
+}
+
+.panel img {
+  width:100%;
+}
+
+.reveal ul {
+  margin-bottom:30px;
+  text-align: left;
+}
+
+/* TODO: Generalise the left below */
+.reveal code {
+/*white-space: pre-line;*/
+  text-align: left;
+}

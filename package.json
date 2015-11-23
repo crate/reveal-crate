@@ -1,0 +1,18 @@
+{
+  "name": "present",
+  "version": "1.0.0",
+  "description": "Crate simple presentations.",
+  "dependencies": {},
+  "devDependencies": {
+    "http-server": "latest",
+    "bower": "latest"
+  },
+  "scripts": {
+    "postinstall": "bower install",
+
+    "prestart": "npm install",
+    "start": "http-server framework -a localhost -p 8000 -c-1"
+  },
+  "author": "",
+  "license": "ISC"
+}

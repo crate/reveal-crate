@@ -1,0 +1,21 @@
+{
+  "name": "present",
+  "description": "Crate simple presentations.",
+  "main": "",
+  "authors": [
+    "Claus Matzinger <claus@crate.io>"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "framework/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "reveal-js": "~2.6.2"
+  }
+}

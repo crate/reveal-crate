@@ -1,0 +1,88 @@
+@font-face {
+  font-family: BlenderPro;
+  src: url('/font/blender/BlenderPro-ThinWeb.eot');
+  src: url('/font/blender/BlenderPro-ThinWeb.eot?#iefix') format('embedded-opentype'),
+  url('/font/blender/BlenderPro-ThinWeb.woff') format('woff'),
+  url('/font/blender/BlenderPro-Thin.ttf') format('truetype');
+  font-weight: normal;
+  /*font-weight: 300;*/
+}
+
+@font-face {
+  font-family: BlenderPro;
+  src: url('/font/blender/BlenderPro-BoldWeb.eot');
+  src: url('/font/blender/BlenderPro-BoldWeb.eot?#iefix') format('embedded-opentype'),
+  url('/font/blender/BlenderPro-BoldWeb.woff') format('woff'),
+  url('/font/blender/BlenderPro-Bold.ttf') format('truetype');
+  font-weight: bold;
+  /*font-weight: 800;*/
+}
+
+.blender {
+  font-family: BlenderPro;
+}
+
+body,
+.reveal {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 32px;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  color: #000000;
+  background-color: #ffffff;
+}
+
+body .reveal .white,
+body .reveal .white h2 {
+  color: #fff;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3 {
+  font-family: BlenderPro;
+  font-weight: 800;
+  color: #5987FF;
+  text-transform: uppercase;
+  font-size: 2.5em;
+  margin-bottom: 64px;
+}
+
+.reveal h2 {
+  font-size: 1.6em;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.reveal h3 {
+  color: inherit;
+  font-size: 1.3em;
+}
+
+.reveal .sub-title {
+  margin-bottom: 16px;
+  font-size: 1.6em;
+}
+
+.reveal code {
+  font-family: Inconsolata;
+  padding: 16px;
+  margin: 16px;
+}
+
+.reveal pre {
+  font-family: Inconsolata;
+  text-align: left;
+}
+.reveal pre th {
+  padding-left: 10px;
+  font-weight: 800;
+  border-bottom: 1px solid black;
+}
+
+.reveal pre td {
+  padding-left: 10px;
+}
+.reveal pre {
+	box-shadow: none;
+}
