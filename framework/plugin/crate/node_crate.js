@@ -2069,7 +2069,7 @@ module.exports = function (Buffer, Hash) {
     if(!(this instanceof Sha1)) return new Sha1()
     this._w = W
     Hash.call(this, 16*4, 14*4)
-  
+
     this._h = null
     this.init()
   }
@@ -2820,7 +2820,7 @@ http.request = function (params, cb) {
     if (!params.host && params.hostname) {
         params.host = params.hostname;
     }
-    
+
     if (!params.scheme) params.scheme = window.location.protocol.split(':')[0];
     if (!params.host) {
         params.host = window.location.hostname || window.location.host;
@@ -2832,7 +2832,7 @@ http.request = function (params, cb) {
         params.host = params.host.split(':')[0];
     }
     if (!params.port) params.port = params.scheme == 'https' ? 443 : 80;
-    
+
     var req = new Request(new xhrHttp, params);
     if (cb) req.on('response', cb);
     return req;
@@ -2953,23 +2953,23 @@ var Request = module.exports = function (xhr, params) {
     self.writable = true;
     self.xhr = xhr;
     self.body = [];
-    
+
     self.uri = (params.scheme || 'http') + '://'
         + params.host
         + (params.port ? ':' + params.port : '')
         + (params.path || '/')
     ;
-    
+
     if (typeof params.withCredentials === 'undefined') {
         params.withCredentials = true;
     }
 
     try { xhr.withCredentials = params.withCredentials }
     catch (e) {}
-    
+
     if (params.responseType) try { xhr.responseType = params.responseType }
     catch (e) {}
-    
+
     xhr.open(
         params.method || 'GET',
         self.uri,
@@ -2977,7 +2977,7 @@ var Request = module.exports = function (xhr, params) {
     );
 
     self._headers = {};
-    
+
     if (params.headers) {
         var keys = objectKeys(params.headers);
         for (var i = 0; i < keys.length; i++) {
@@ -2987,7 +2987,7 @@ var Request = module.exports = function (xhr, params) {
             self.setHeader(key, value);
         }
     }
-    
+
     if (params.auth) {
         //basic auth
         this.setHeader('Authorization', 'Basic ' + Base64.btoa(params.auth));
@@ -2997,11 +2997,11 @@ var Request = module.exports = function (xhr, params) {
     res.on('close', function () {
         self.emit('close');
     });
-    
+
     res.on('ready', function () {
         self.emit('response', res);
     });
-    
+
     xhr.onreadystatechange = function () {
         // Fix for IE9 bug
         // SCRIPT575: Could not complete the operation due to error c00c023f
@@ -3070,7 +3070,7 @@ Request.prototype.end = function (s) {
         }
         var body = new(this.body[0].constructor)(len);
         var k = 0;
-        
+
         for (var i = 0; i < this.body.length; i++) {
             var b = this.body[i];
             for (var j = 0; j < b.length; j++) {
@@ -3158,13 +3158,13 @@ function parseHeaders (res) {
     for (var i = 0; i < lines.length; i++) {
         var line = lines[i];
         if (line === '') continue;
-        
+
         var m = line.match(/^([^:]+):\s*(.*)/);
         if (m) {
             var key = m[1].toLowerCase(), value = m[2];
-            
+
             if (headers[key] !== undefined) {
-            
+
                 if (isArray(headers[key])) {
                     headers[key].push(value);
                 }
@@ -3203,7 +3203,7 @@ Response.prototype.handle = function (res) {
         catch (err) {
             capable.status2 = false;
         }
-        
+
         if (capable.status2) {
             this.emit('ready');
         }
@@ -3217,7 +3217,7 @@ Response.prototype.handle = function (res) {
             }
         }
         catch (err) {}
-        
+
         try {
             this._emitData(res);
         }
@@ -3231,12 +3231,12 @@ Response.prototype.handle = function (res) {
             this.emit('ready');
         }
         this._emitData(res);
-        
+
         if (res.error) {
             this.emit('error', this.getResponse(res));
         }
         else this.emit('end');
-        
+
         this.emit('close');
     }
 };
@@ -8116,7 +8116,7 @@ exports.getHttpOptions = function () {
 
 }).call(this,require('_process'))
 },{"_process":26}],49:[function(require,module,exports){
-(function (factory) {  
+(function (factory) {
   if (typeof exports == 'object') {
     module.exports = factory();
   } else if ((typeof define == 'function') && define.amd) {
@@ -8190,7 +8190,7 @@ exports.getHttpOptions = function () {
     var typer = (of(test) === String) ? stringType : of;
     return (typer(obj) === test);
   }
-  
+
   function instance (obj, test) {
     return (obj instanceof test);
   }
@@ -8218,7 +8218,7 @@ exports.getHttpOptions = function () {
     }
     return false;
   }
-  
+
   var exports = function (obj, type) {
     if (arguments.length == 1) {
       return of(obj);
@@ -8249,7 +8249,7 @@ The MIT License(MIT)
 Copyright(C) 2014 by Stefan Thies, Igor Likhomanov
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files(the "Software"), 
+of this software and associated documentation files(the "Software"),
 to deal in the Software without restriction, including without limitation the rights
 to use, copy, modify, merge, publish, distribute, sublicense, and / or sell
 copies of the Software, and to permit persons to whom the Software is

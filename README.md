@@ -8,6 +8,17 @@ Requires `node.js/npm` and `bower` to run.
 npm install
 npm start
 ```
+### Running Crate
+
+In order to access the Crate endpoint, add the following to `config/crate.yml`:
+
+```yaml
+http.cors.enabled: true
+http.cors.allow-origin: /https?:\/\/localhost(:[0-9]+)?/
+http.cors.allow-credentials: true
+```
+
+It will allow `localhost:xxxxx` origins to access the RESTful endpoint.
 
 
 ## Edit

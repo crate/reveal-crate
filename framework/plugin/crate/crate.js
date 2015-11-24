@@ -1,92 +1,114 @@
 var RevealCrate = (function() {
-    var crate = require('node-crate'),
-        sqlSections = document.querySelectorAll('[data-crate]'),
-        sqlSection,
-        sqlCommand;
 
-    crate.connect('localhost', 4200);
-    crate.execute("select * from sys.cluster").error(function (e) {
-        console.error("could not connect to crate server", e);
-    });
+  var crateQuerySelector = '[data-crate]';
+  var queryResultSelector = 'crate-result';
 
-    function format(element) {
-        if (typeof element === 'object') {
-            return JSON.stringify(element);
-        } else {
-            return element;
+  var crateAddress = 'localhost';
+  var cratePort = 4200;
+
+  var crate = require('node-crate'),
+    sqlSections = document.querySelectorAll(crateQuerySelector),
+    sqlSection,
+    sqlCommand;
+
+  crate.connect(crateAddress, cratePort);
+  crate.execute("select * from sys.cluster").error(function(e) {
+    console.error("could not connect to crate server", e);
+  });
+
+  function format(element) {
+    if (typeof element === 'object') {
+      return JSON.stringify(element);
+      5
+    } else {
+      return element;
+    }
+  }
+
+  function getEmptyWrapper(node) {
+    var element = node.parentNode.parentNode.querySelector(queryResultSelector);
+    if (element !== null) {
+      element.innerHTML = '';
+    }
+    return element;
+  }
+
+  for (var i = 0, len = sqlSections.length; i < len; i++) {
+    sqlSection = sqlSections[i];
+
+    if (sqlSection.tagName.toUpperCase() === "CODE") {
+      sqlSection.setAttribute("style", "cursor:pointer;");
+
+      sqlSection.addEventListener('click', function(event) {
+        var code = event.target;
+        while (code.tagName.toUpperCase() !== "CODE") {
+          code = code.parentNode;
         }
+        var wrapperElem = getEmptyWrapper(code);
+
+        var sqlCommand = code.textContent;
+        if (sqlCommand.charAt(sqlCommand.length - 1) === ';') {
+          sqlCommand = sqlCommand.substr(0, sqlCommand.length - 1)
+        }
+        console.log(sqlCommand);
+
+        crate.execute(sqlCommand).success(function(res) {
+          var wrapperElem = getEmptyWrapper(code);
+
+          if (res.error) {
+            res.cols = ["Error"];
+            res.rows = [
+              [res.error]
+            ];
+          } else if (res.rows.length == 0 && res.rowcount > 0) {
+            res.cols = ["Duration", "Rowcount"];
+            res.rows = [
+              [res.duration, res.rowcount]
+            ];
+          }
+
+          // DURATION
+          var durationElem = document.createElement("p");
+          durationElem.classList.add("crate-result-duration");
+          durationElem.innerHTML = "" + res.rowcount + " rows in " + (res.duration / 1000.0) + "s";
+
+          tableElem = document.createElement('table');
+
+          // HEADER
+          var headerElems = document.createElement('thead');
+          headerElems.classList.add("crate-result-header");
+          rowElem = document.createElement('tr');
+
+          res.cols.forEach(function(c, i) {
+            rowElem.innerHTML += '<th class="crate-result-header-cell">' + c + "</th>"
+          });
+          headerElems.appendChild(rowElem);
+          // BODY
+          var tableBodyElem = document.createElement('tbody');
+
+          res.rows.forEach(function(row, i) {
+            var node = document.createElement('tr');
+            node.innerHTML = '';
+            res.cols.forEach(function(c, i) {
+              node.innerHTML += "<td class='crate-result-table-cell'>" + format(row[i]) + "</td>";
+            });
+            tableBodyElem.appendChild(node);
+          });
+
+          console.debug(res.rows);
+          tableElem.appendChild(headerElems);
+          tableElem.appendChild(tableBodyElem);
+          wrapperElem.appendChild(durationElem);
+          wrapperElem.appendChild(tableElem);
+
+
+        }).error(function(e) {
+          console.error("could not execute statement:", e);
+
+        });
+      })
     }
 
-
-
-    function addResultTable(node, table) {
-        var resultTable = node.parentNode.parentNode.querySelector('.crate-result');
-        if (resultTable !== null) {
-            resultTable.remove();
-        }
-        node.parentNode.parentNode.appendChild(table);
-    }
-
-    function removeResultTable(node) {
-        var element = node.parentNode.parentNode.querySelector('.crate-result');
-        if (element !== null) {
-            element.remove();
-        }
-    }
-
-    for( var i = 0, len = sqlSections.length; i < len; i++ ) {
-        sqlSection = sqlSections[i];
-        if (sqlSection.tagName.toUpperCase() === "CODE") {
-            sqlSection.setAttribute("style", "cursor:pointer;");
-            sqlSection.addEventListener('click', function (event) {
-                var code = event.target;
-                while (code.tagName.toUpperCase() !== "CODE") {
-                    code = code.parentNode;
-                }
-                removeResultTable(code);
-                var sqlCommand = code.textContent;
-                if (sqlCommand.charAt(sqlCommand.length-1) === ';') {
-                    sqlCommand = sqlCommand.substr(0, sqlCommand.length-1)
-                }
-                console.log(sqlCommand);
-                crate.execute(sqlCommand).success(function(res){
-                    if(res.error){
-                        res.cols = ["Error"];
-                        res.rows = [[res.error]];
-                    } else if (res.rows.length == 0 && res.rowcount > 0){
-                        res.cols = ["Duration", "Rowcount"];
-                        res.rows = [[res.duration, res.rowcount]];
-                    }
-                    console.debug(res.rows);
-                    var resultTable = document.createElement('table');
-                    var header = '<thead><tr>';
-                    for (i=0; i<res.cols.length; i++) {
-                        header += '<th>' + res.cols[i] + '</th>';
-                    }
-                    header += '</tr></thead>';
-                    var body = '<tbody>';
-                    for (var i=0; i<res.rows.length; i++) {
-                        body += '<tr>';
-                        for (var j=0; j < res.rows[i].length; j++) {
-                            body += '<td>' + format(res.rows[i][j]) + '</td>';
-                        }
-                        body += '</tr>';
-                    }
-                    body += '</tbody>';
-                    resultTable.innerHTML = header + body;
-                    resultTable.setAttribute("style", "font-size:20pt;");
-                    var pre = document.createElement("pre");
-                    pre.setAttribute("style", "margin-top:2em;overflow-x:scroll;padding:8px;");
-                    pre.setAttribute("class", "crate-result");
-                    pre.appendChild(resultTable);
-                    addResultTable(code, pre);
-                }).error(function(e) {
-                    console.error("could not execute statement:", e);
-
-                });
-            })
-        }
-
-    }
+  }
 
 })();
