@@ -1,39 +1,40 @@
-# RECOVERY STATE
+# Reveal Crate
 
 
 
-# Acceptance Criteria
-### Ashish wants to monitor the restore of an index in detail in order to estimate when the restore process is finished
+# Put your data to work.
+## Simply.
 
- * track recovering process of a shard
- * use SQL to do this
+ * Easily scalable
+ * SQL query language
 
 
 
-# Data Model
-(per shard)
-```javascript
-"recovery" : {
-  "size" : {
-    "total_bytes" : 79063092,
-    "reused_bytes" : 0,
-    "recovered_bytes" : 68891939
-  },
-  "files" : {
-    "total" : 73,
-    "reused" : 0,
-    "recovered" : 69
-  },
-  "total_time" : 0
-}
+# RESTful
+## with JSON
+```shell
+$ curl 'http://localhost:4200/_sql' --data-binary '{"stmt":"select name, id from sys.cluster"}'
+
+{"cols":["name","id"],"duration":0,"rows":[["crate","4ddf5507-15a9-4600-8dd1-503ba3aa4827"]],"rowcount":1}
 ```
 
 
 
-# Queries
+# Try it yourself!
+First, start a local instance of Crate.
+
+
+
+# Run a Query
+## Then, click on this query:
 <pre>
 <code data-crate class="sql">
-select recovery from sys.shards;
+select name, id from sys.cluster;
 </code>
 </pre>
 ### Results: <!-- .element: class="crate-result" data-fragment-index="1" -->
+
+
+
+# Thanks!
+Visit us at https://crate.io

@@ -1,7 +1,7 @@
 {
-  "name": "present",
+  "name": "reveal-crate",
   "version": "1.0.0",
-  "description": "Crate simple presentations.",
+  "description": "Crate's simple presentation framework.",
   "dependencies": {},
   "devDependencies": {
     "http-server": "latest",
@@ -9,10 +9,9 @@
   },
   "scripts": {
     "postinstall": "bower install",
-
     "prestart": "npm install",
     "start": "http-server framework -a localhost -p 8000 -c-1"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Crate.IO GmbH <office@crate.io>",
+  "license": "Apache-2.0"
 }
