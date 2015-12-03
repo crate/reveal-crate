@@ -23,7 +23,7 @@ var RevealCrate = (function() {
   var queryResultSelector = 'crate-result';
 
   var crateAddress = 'localhost';
-  var cratePort = 4200;
+  var cratePort = 8000;
 
   var crate = require('node-crate'),
     sqlSections = document.querySelectorAll(crateQuerySelector),

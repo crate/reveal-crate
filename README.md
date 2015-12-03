@@ -5,21 +5,19 @@
 Requires `node.js/npm` and `bower` to run.
 
 ```bash
-npm install
-npm start
+bower install
 ```
 ### Running Crate
 
-In order to access the Crate endpoint, add the following to `config/crate.yml`:
-
-```yaml
-http.cors.enabled: true
-http.cors.allow-origin: /https?:\/\/localhost(:[0-9]+)?/
-http.cors.allow-credentials: true
+```bash
+python3 server.py 
 ```
 
-It will allow `localhost:xxxxx` origins to access the RESTful endpoint.
+or
 
+```bash
+python3 server.py --hosts <hosts>
+```
 
 ## Edit
 
@@ -63,7 +61,7 @@ First, start a local instance of Crate.
 select name, id from sys.cluster;
 </code>
 </pre>
-### Results: <!-- .element: class="crate-result" data-fragment-index="1" -->
+<crate-result></crate-result>
 
 
 

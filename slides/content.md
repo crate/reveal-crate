@@ -29,10 +29,10 @@ First, start a local instance of Crate.
 ## Then, click on this query:
 <pre>
 <code data-crate class="sql">
-select name, id from sys.cluster;
+select name, id from sys.cluster
 </code>
 </pre>
-### Results: <!-- .element: class="crate-result" data-fragment-index="1" -->
+<crate-result></crate-result>
 
 
 
