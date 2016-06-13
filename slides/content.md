@@ -1,40 +1,39 @@
-# Reveal Crate
+# demo a crate engineer in admin ui
 
 
 
-# Put your data to work.
-## Simply.
 
- * Easily scalable
- * SQL query language
+![One whish](images/bathtube.jpg)
 
 
 
-# RESTful
-## with JSON
-```shell
-$ curl 'http://localhost:4200/_sql' --data-binary '{"stmt":"select name, id from sys.cluster"}'
 
-{"cols":["name","id"],"duration":0,"rows":[["crate","4ddf5507-15a9-4600-8dd1-503ba3aa4827"]],"rowcount":1}
-```
+
+### Christian wants that users can request a 1 on 1 demo session directly from the Admin UI in order to generate more such sessions to convert open source users to paying customers.
 
 
 
-# Try it yourself!
-First, start a local instance of Crate.
+
+
+## Additional
+
+* probably it would make sense to load such links from the website in order to not always require an admin-ui update 
+
+![AC](images/ac.png)
 
 
 
-# Run a Query
-## Then, click on this query:
-<pre>
-<code data-crate class="sql">
-select name, id from sys.cluster
-</code>
-</pre>
-<crate-result></crate-result>
+
+# Demo
+[Admin-UI](http://localhost:9000)
 
 
 
-# Thanks!
-Visit us at https://crate.io
+# Load links from the website
+[menu.json](https://crate.io/feed/menu.json)
+
+
+
+
+
+![Thanks](images/thanks.jpg)
