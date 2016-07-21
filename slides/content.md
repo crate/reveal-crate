@@ -1,38 +1,52 @@
-# Reveal Crate
+# Azure Discovery
 
 
 
-# Put your data to work.
-## Simply.
-
- * Easily scalable
- * SQL query language
+## Silvano wants Crate to use the Azure discovery in order to be compliant with the Azure way of doing things.
 
 
+  * No Azure dependencies in core distribution.
 
-# RESTful
-## with JSON
-```shell
-$ curl 'http://localhost:4200/_sql' --data-binary '{"stmt":"select name, id from sys.cluster"}'
 
-{"cols":["name","id"],"duration":0,"rows":[["crate","4ddf5507-15a9-4600-8dd1-503ba3aa4827"]],"rowcount":1}
+
+# Problem #1 - ES Plugin uses outdated API
+
+  * Elasticsearch has deprecated their plugin because it uses an outdated API
+  * Updated and contributed API Changes
+
+
+
+# Problem #2 - Azure removed "service" form API
+
+Which nodes to discover now? 
+
+![Which](images/question.jpg)
+
+
+
+# Solution
+
+Nodes in the same vnet or subnet or discoverable
+
+```
+disovery.azure.method: vnet
 ```
 
 
 
-# Try it yourself!
-First, start a local instance of Crate.
+# How is it integrated in crate?
+
+  * Crate is shipped with the elasticsearch azure-discovery plugin
+  * But Azure dependencies are not shipped
+  * User has to add Azure dependencies to make plugin work
+
+Same concept as in hdfs snapshot plugin
 
 
 
-# Run a Query
-## Then, click on this query:
-<pre>
-<code data-crate class="sql">
-select name, id from sys.cluster
-</code>
-</pre>
-<crate-result></crate-result>
+# Documentation
+
+[Documentation](http://crate.readthedocs.io/en/ab-azure-discovery/azure_discovery.html#azure-discovery)
 
 
 
