@@ -1,9 +1,11 @@
-# Azure Discovery
+# sys.nodes query resiliency
 
 
 
-## Silvano wants Crate to use the Azure discovery in order to be compliant with the Azure way of doing things.
+## Justin wants to know which node hangs when such a node prevents sys queries and therefore the admin ui from working.
 
+
+as we've also discovered with our azure 1001 node effort a single stuck nodes lets the sys.nodes queries wait forever
 
   * No Azure dependencies in core distribution.
 
