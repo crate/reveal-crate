@@ -7,50 +7,60 @@
 
 as we've also discovered with our azure 1001 node effort a single stuck nodes lets the sys.nodes queries wait forever
 
-  * No Azure dependencies in core distribution.
+
+  * queries to sys.nodes never hangs
 
 
 
-# Problem #1 - ES Plugin uses outdated API
+# Demo Setup
 
-  * Elasticsearch has deprecated their plugin because it uses an outdated API
-  * Updated and contributed API Changes
-
-
-
-# Problem #2 - Azure removed "service" form API
-
-Which nodes to discover now? 
-
-![Which](images/question.jpg)
+  * 2 good nodes
+  * 1 hanging node
 
 
 
-# Solution
-
-Nodes in the same vnet or subnet or discoverable
-
-```
-disovery.azure.method: vnet
-```
+# Actions we have taken
 
 
 
-# How is it integrated in crate?
-
-  * Crate is shipped with the elasticsearch azure-discovery plugin
-  * But Azure dependencies are not shipped
-  * User has to add Azure dependencies to make plugin work
-
-Same concept as in hdfs snapshot plugin
+# #1 Timeouts (3s)
 
 
+<pre>
+ <code data-crate class="sql">
+ select id, name, hostname from sys.nodes
+ </code>
+ </pre>
+<crate-result></crate-result>
 
-# Documentation
 
-[Documentation](http://crate.readthedocs.io/en/ab-azure-discovery/azure_discovery.html#azure-discovery)
+
+# #2 Don't send unnecessary requests
+
+If requested information is available in cluster state,
+we don't query the nodes
+
+
+<pre>
+ <code data-crate class="sql">
+ select id, name from sys.nodes
+ </code>
+ </pre>
+<crate-result></crate-result>
+
+
+
+# #3 Don't request unnecessary nodes
+
+
+<pre>
+ <code data-crate class="sql">
+ select id, name, hostname from sys.nodes where id='Vf0mqWrvSVKRT1ZU2-fbMQ' or id='DJobqfb_QZibZosCVass1g'
+ </code>
+ </pre>
+<crate-result></crate-result>
 
 
 
 # Thanks!
-Visit us at https://crate.io
+![Ruslan](slides/images/ruslan.jpg)
