@@ -1,12 +1,12 @@
-# Reveal Crate
+# F501: sql_features view
+
+dejan wants to have an overview about sql features supported by crate in order to check what is implemented
 
 
 
-# Put your data to work.
-## Simply.
+# AC
 
- * Easily scalable
- * SQL query language
+ * implement feature F501 information_schema.sql_features
 
 
 
