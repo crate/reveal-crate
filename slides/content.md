@@ -10,31 +10,36 @@ dejan wants to have an overview about sql features supported by crate in order t
 
 
 
-# RESTful
-## with JSON
-```shell
-$ curl 'http://localhost:4200/_sql' --data-binary '{"stmt":"select name, id from sys.cluster"}'
+# Demo
 
-{"cols":["name","id"],"duration":0,"rows":[["crate","4ddf5507-15a9-4600-8dd1-503ba3aa4827"]],"rowcount":1}
-```
-
-
-
-# Try it yourself!
-First, start a local instance of Crate.
-
-
-
-# Run a Query
-## Then, click on this query:
 <pre>
-<code data-crate class="sql">
-select name, id from sys.cluster
-</code>
+   <code data-crate class="sql">
+SELECT * FROM information_schema.sql_features LIMIT 10
+   </code>
 </pre>
 <crate-result></crate-result>
 
 
 
+# Feature complete?
+
+<pre>
+   <code data-crate class="sql">
+SELECT is_supported, count(\*)
+FROM information_schema.sql_features
+GROUP BY is_supported
+   </code>
+</pre>
+<crate-result></crate-result>
+
+
+
+# Documentation
+
+[Documentation](http://crate.readthedocs.io/projects/crate/en/sql-features-view/sql/information_schema.html#sql-features)
+
+[Features List](http://crate.readthedocs.io/projects/crate/en/sql-features-view/sql/features.html)
+
+
+
 # Thanks!
-Visit us at https://crate.io
