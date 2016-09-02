@@ -123,3 +123,8 @@ crate-result {
   padding-left: 16px !important;
   padding-right: 16px !important;
 }
+
+.olMapViewport #OpenLayers_Map_2_OpenLayers_Container {
+    width: 1024px !important;
+    height: 800px !important;
+}
