@@ -2,11 +2,6 @@ var RevealMap = (function() {
     map = new OpenLayers.Map("mapdiv");
     map.addLayer(new OpenLayers.Layer.OSM());
        
-    var pois = new OpenLayers.Layer.Text( "My Points",
-                    { location:"./textfile.txt",
-                      projection: map.displayProjection
-                    });
-    map.addLayer(pois);
     // create layer switcher widget in top right corner of map.
     var layer_switcher= new OpenLayers.Control.LayerSwitcher({});
     map.addControl(layer_switcher);
@@ -61,6 +56,7 @@ var RevealMap = (function() {
             console.log(sqlCommand);
     
             crate.execute(sqlCommand).success(function(res) {
+                console.log(res);
                 nodesLayer.adFeatures(getSprintersFeatures());
                 res.rows.forEach(function(row) {
                     var latLong = row[0];
