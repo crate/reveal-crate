@@ -8,7 +8,18 @@ WHERE state = 'STARTED' and mountain=_node['name']
 </pre>
 
 
-<div id="mapdiv" style="width: 1024px; height: 800px"></div>
+<div id="mapdiv" style="width: 1024px; height: 800px; position: relative;">
+  <div id="info" style="
+    position: absolute;
+    z-index: 9999;
+    top: 0px;
+    width: 100%;
+    font-size: 75%;
+    background-color: #55d4f5;
+    color: #fff;
+    display: none;
+  ">blahblah</div>
+</div>
 
 
 
@@ -35,7 +46,7 @@ Dimitri wants to see different node naming like elasticsearch as he wants to tru
 ## Hello sys.summits
 
 <pre>
-<code data-crate class="sql">SELECT mountain, country, coordinates, region 
+<code data-crate class="sql">SELECT mountain, country, coordinates, region
 FROM sys.summits, sys.nodes
 WHERE mountain = sys.nodes.name
 </code>
