@@ -1,9 +1,10 @@
 # Where is my data?
 
 <pre>
-<code map-crate class="sql">SELECT coordinates, mountain, state, table_name, num_docs
+<code map-crate class="sql">
+SELECT coordinates, mountain, state, table_name, num_docs 
 FROM sys.shards, sys.summits
-WHERE state = 'STARTED' and mountain=_node['name']
+WHERE state = 'STARTED' and mountain=_node['name'] and table_name='locations'
 </code>
 </pre>
 
@@ -38,6 +39,7 @@ Dimitri wants to see different node naming like elasticsearch as he wants to tru
 <code data-crate class="sql">SELECT mountain, country, coordinates, region 
 FROM sys.summits, sys.nodes
 WHERE mountain = sys.nodes.name
+LIMIT 100
 </code>
 </pre>
 <crate-result></crate-result>

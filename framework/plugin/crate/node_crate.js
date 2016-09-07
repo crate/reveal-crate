@@ -2961,7 +2961,7 @@ var Request = module.exports = function (xhr, params) {
     ;
 
     if (typeof params.withCredentials === 'undefined') {
-        params.withCredentials = true;
+        params.withCredentials = false;
     }
 
     try { xhr.withCredentials = params.withCredentials }
@@ -8416,6 +8416,7 @@ function executeSql(sql, args, cb) {
             response.on('end', function () {
                 var result = {};
                 try {
+                    str = str.replace(',"rowcount"', '}')
                     result = JSON.parse(str);
                 } catch (ex) {
                     console.log('error:' + sql);

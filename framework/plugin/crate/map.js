@@ -28,8 +28,8 @@ var RevealMap = (function() {
     });
     map.addLayer(nodesLayer);
 
-    var crateAddress = 'localhost';
-    var cratePort = 8000;
+    var crateAddress = 'st1.p.fir.io';
+    var cratePort = 44200;
     var crate = require('node-crate'),
         sqlSections = document.querySelectorAll(crateMapQuerySelector);
     crate.connect(crateAddress, cratePort);
