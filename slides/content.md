@@ -1,18 +1,3 @@
-# Where is my data?
-
-<pre>
-<code map-crate class="sql">
-SELECT coordinates, mountain, state, table_name, num_docs 
-FROM sys.shards, sys.summits
-WHERE state = 'STARTED' and mountain=_node['name'] and table_name='locations'
-</code>
-</pre>
-
-
-<div id="mapdiv" style="width: 1024px; height: 800px"></div>
-
-
-
 # Different node names than elasticsearch
 
 Dimitri wants to see different node naming like elasticsearch as he wants to trust Crate and see it as an own product and not only a rip off from elasticsearch.
@@ -43,6 +28,21 @@ LIMIT 100
 </code>
 </pre>
 <crate-result></crate-result>
+
+
+
+# Where is my data?
+
+<pre>
+<code map-crate class="sql">
+SELECT coordinates, mountain, state, table_name, num_docs 
+FROM sys.shards, sys.summits
+WHERE state = 'STARTED' and mountain=_node['name'] and table_name='locations'
+</code>
+</pre>
+
+
+<div id="mapdiv" style="width: 1024px; height: 800px"></div>
 
 
 

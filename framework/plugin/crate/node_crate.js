@@ -8416,14 +8416,19 @@ function executeSql(sql, args, cb) {
             response.on('end', function () {
                 var result = {};
                 try {
-                    str = str.replace(',"rowcount"', '}')
                     result = JSON.parse(str);
                 } catch (ex) {
-                    console.log('error:' + sql);
-                    if (cb) {
-                        cb(ex, null, null);
+                    try {
+                        str = str.replace(',"rowcount"', '}');
+                        console.log(str);
+                        result = JSON.parse(str);
+                    } catch (ex) {
+                        console.log('error:' + sql);
+                        if (cb) {
+                            cb(ex, null, null);
+                        }
+                        return;
                     }
-                    return;
                 }
                 if (!result.rows) { /* || /CREATE BLOB/im.test (sql)) */
                     // workaround CRATE does not return a row when it creates a BLOB

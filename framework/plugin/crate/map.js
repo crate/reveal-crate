@@ -7,12 +7,12 @@ var RevealMap = (function() {
     map.addControl(layer_switcher);
 
     //Set start centrepoint and zoom
-    var lonLat = new OpenLayers.LonLat( 9.5788, 48.9773 )
+    var lonLat = new OpenLayers.LonLat( 12.30278, 46.51917 )
           .transform(
             new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
             map.getProjectionObject() // to Spherical Mercator Projection
           );
-    var zoom=5;
+    var zoom=8;
     map.setCenter (lonLat, zoom);
 
     var crateMapQuerySelector = '[map-crate]';
