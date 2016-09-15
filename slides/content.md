@@ -90,10 +90,8 @@ ORDER BY month
 
 # The 95% Percentile
 <pre><code data-crate data-trim class="sql">
-SELECT percentile(temperature, [0.95, 0.25]),  date_format ('%m', date) as month
+SELECT percentile(temperature, [0.95, 0.25]) as perc
 FROM weather
-GROUP BY month
-ORDER BY month
 </code></pre>
 <crate-result></crate-result>
 
