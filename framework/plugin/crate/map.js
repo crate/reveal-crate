@@ -1,5 +1,19 @@
 var RevealMap = (function() {
-    map = new OpenLayers.Map("mapdiv");
+
+    map = new OpenLayers.Map({
+      div: "mapdiv",
+      eventListeners: {
+        featureover: function(e) {
+            var info = document.getElementById('info');
+            info.innerHTML = 'Mountain: ' + e.feature.data.mountain + ' / Num Docs: ' + e.feature.data.num_docs;
+            info.style.display = 'block';
+        },
+        featureout: function(e) {
+          var info = document.getElementById('info');
+          info.style.display = 'none';
+        }
+      }
+    });
     map.addLayer(new OpenLayers.Layer.OSM());
 
     // create layer switcher widget in top right corner of map.
@@ -82,7 +96,7 @@ function getFeatures(json) {
             );
 
       featureDetails.push({'type': 'Feature', 'geometry': {'type': 'Point', 'coordinates': [transformedCoordinate.lon, transformedCoordinate.lat]},
-          'properties': {'Mountain': 'Igor Tihonov'}
+          'properties': {'mountain': json[i].mountain, 'num_docs': json[i].num_docs}
         });
     }
 
