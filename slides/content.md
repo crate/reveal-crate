@@ -1,86 +1,48 @@
-# Percentile
+# Percentile Aggregation
+Integrations Team
+
+
+
+
+#Story Scope
+githubmui wants to compute the 95% percentile of logged web request response times in order to generate stats
+
+
+
+
+#Acceptance Criteria
+ - inform githubmui about master merge
+ - inform [intercom conversation](https://app.intercom.io/a/apps/bda97f31bea8f639d9e93721d781cef31ff00628/inbox/unassigned/conversations/4559517542)
+
+
+
+
+
+#Implemetation
 Implement an aggregation that computes a `percentile` over numeric non null values in a column.
 
+ - Using the Implementation of TDigest of Elastic Search
+ - Generate a Benchmark Dataset
 
 
 
-# UseCase: Berlin Wheather
+
+
+# UseCase: Berlin Weather
 <pre><code data-crate data-trim class="sql">
-DROP TABLE IF EXISTS weather
-</code></pre>
-
-<pre><code data-crate data-trim class="sql">
-CREATE TABLE weather (
-    id integer primary key,
-    date timestamp,
-    temperature float
-) with (number_of_replicas=0)
+SELECT * FROM weather;
 </code></pre>
 
 <crate-result></crate-result>
 
 
-
-
-# UseCase: August Temperature Data
-<pre><code data-crate data-trim class="sql">
-INSERT INTO weather (id, date, temperature) VALUES
-    (1, '2016-08-01', 26),
-    (2, '2016-08-02', 23),
-    (3, '2016-08-03', 15),
-    (4, '2016-08-04', 18),
-    (5, '2016-08-05', 23),
-    (6, '2016-08-06', 24),
-    (7, '2016-08-07', 22),
-    (8, '2016-08-08', 23),
-    (9, '2016-08-09', 25),
-    (10, '2016-08-10', 29),
-    (11, '2016-08-11', 22),
-    (12, '2016-08-12', 18),
-    (13, '2016-08-13', 20),
-    (14, '2016-08-14', 19),
-    (15, '2016-08-15', 28),
-    (16, '2016-08-16', 22),
-    (17, '2016-08-17', 21),
-    (18, '2016-08-18', 22),
-    (19, '2016-08-19', 22),
-    (20, '2016-08-20', 20),
-    (21, '2016-08-21', 26),
-    (22, '2016-08-22', 26),
-    (23, '2016-08-23', 23),
-    (24, '2016-08-24', 25),
-    (25, '2016-08-25', 24),
-    (26, '2016-08-26', 28),
-    (27, '2016-08-27', 29),
-    (28, '2016-08-28', 34),
-    (29, '2016-08-29', 32),
-    (30, '2016-08-30', 35),
-    (31, '2016-08-31', 25)
-</code></pre>
-
-
-<crate-result></crate-result>
-
-
-
-
-# The median Temperature for August
-<pre><code data-crate data-trim class="sql">
-SELECT percentile(temperature, 0.5),  date_format ('%m', date) as month
-FROM weather
-GROUP BY month
-ORDER BY month
-</code></pre>
-<crate-result></crate-result>
 
 
 
 # The 95% percentile Temperature for August
 <pre><code data-crate data-trim class="sql">
-SELECT percentile(temperature, 0.95),  date_format ('%m', date) as month
+SELECT percentile(temperature, 0.95)
 FROM weather
-GROUP BY month
-ORDER BY month
 </code></pre>
 <crate-result></crate-result>
 
@@ -97,6 +59,23 @@ FROM weather
 
 
 
+# Performance 
+<pre><code>
+56m records in uservisits table
+50 iterations
+
+fraction: [0.2]:
+average time:
+    cr: 2114ms
+    es: 1923ms 
+
+fractions [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7]
+average time:
+    cr: 2202ms
+    es: 1920ms
+</code></pre>
+
+
 
 # Documentation
 [Percentile](http://crate.readthedocs.org/projects/crate/en/latest/sql/aggregation.html#percentile)
@@ -104,3 +83,6 @@ FROM weather
 
 
 # Thanks!
+![](http://4.bp.blogspot.com/-PBaqGbdz1c4/UbMAfln99VI/AAAAAAAAMLE/xBUhjzWM7ZU/s1600/dog-hind-legs.gif)
+
+
