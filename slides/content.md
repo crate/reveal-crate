@@ -4,33 +4,20 @@ Integrations Team
 
 
 
-#Story Scope
-githubmui wants to compute the 95% percentile of logged web request response times in order to generate stats
-
-
-
-
-#Acceptance Criteria
- - inform githubmui about master merge
- - inform [intercom conversation](https://app.intercom.io/a/apps/bda97f31bea8f639d9e93721d781cef31ff00628/inbox/unassigned/conversations/4559517542)
-
-
-
-
-
-#Implemetation
+#Implementation
 Implement an aggregation that computes a `percentile` over numeric non null values in a column.
 
- - Using the Implementation of TDigest of Elastic Search
- - Generate a Benchmark Dataset
+
+ - Using the TDigest Algorithm
+ - Generate a Benchmark Dataset and compare with Elastic Search
 
 
 
 
 
-# UseCase: Berlin Weather
+# UseCase: ANOMALY DETECTION IN CPU USAGE 
 <pre><code data-crate data-trim class="sql">
-SELECT * FROM weather;
+SELECT * FROM cpu_usage;
 </code></pre>
 
 <crate-result></crate-result>
@@ -39,10 +26,10 @@ SELECT * FROM weather;
 
 
 
-# The 95% percentile Temperature for August
+# The 95% percentile 
 <pre><code data-crate data-trim class="sql">
-SELECT percentile(temperature, 0.95)
-FROM weather
+SELECT percentile(percent, 0.95)
+FROM cpu_usage
 </code></pre>
 <crate-result></crate-result>
 
@@ -52,8 +39,8 @@ FROM weather
 
 # The 95% Percentile
 <pre><code data-crate data-trim class="sql">
-SELECT percentile(temperature, [0.95, 0.25]) as perc
-FROM weather
+SELECT percentile(percent, [0.95, 0.25]) as perc
+FROM cpu_usage
 </code></pre>
 <crate-result></crate-result>
 
@@ -78,11 +65,11 @@ average time:
 
 
 # Documentation
-[Percentile](http://crate.readthedocs.org/projects/crate/en/latest/sql/aggregation.html#percentile)
+[Percentile](file:///Users/meriamk/Projects/crate/blackbox/docs/out/html/sql/aggregation.html#percentile)
 
 
 
 # Thanks!
-![](http://4.bp.blogspot.com/-PBaqGbdz1c4/UbMAfln99VI/AAAAAAAAMLE/xBUhjzWM7ZU/s1600/dog-hind-legs.gif)
+![](http://49.media.tumblr.com/d0f970403defd335ec12cabb91e4f059/tumblr_n3uexwYxVI1s96utdo1_250.gif)
 
 
