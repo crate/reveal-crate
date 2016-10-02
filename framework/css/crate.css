@@ -54,6 +54,10 @@ body .reveal .white, body .reveal .white h2 {
   background-color: rgba(61, 116, 255, 0.77);
   padding: 40px 0px;
 }
+.reveal a, .reveal a:visited {
+  color: #fff;
+  cursor: pointer;
+}
 .reveal h1, .reveal h2, .reveal h3 {
   font-family: BlenderPro;
   font-weight: 800;
