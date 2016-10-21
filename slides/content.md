@@ -1,40 +1,54 @@
-# Reveal Crate
+# Serve Admin UI from Root
+
+Integrations Team
+
+November 2016
 
 
 
-# Put your data to work.
-## Simply.
+# Implementation
 
- * Easily scalable
- * SQL query language
+Redirection from / -> _plugin/crate-admin if browser user agent is:
+
+* `Mozilla/5.0`
+* `Mozilla/4.0`
+* `Opera`
+
+
+Otherwise, returns JSON as before.
 
 
 
-# RESTful
-## with JSON
+# Demo in browser
+
+[localhost:4200](http://localhost:4200)
+
+
+
+# Demo with curl
+
 ```shell
-$ curl 'http://localhost:4200/_sql' --data-binary '{"stmt":"select name, id from sys.cluster"}'
+$ curl -i -H "Accept: application/json" "localhost:4200"
 
-{"cols":["name","id"],"duration":0,"rows":[["crate","4ddf5507-15a9-4600-8dd1-503ba3aa4827"]],"rowcount":1}
-```
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=UTF-8
+Content-Length: 339
 
-
-
-# Try it yourself!
-First, start a local instance of Crate.
-
-
-
-# Run a Query
-## Then, click on this query:
-<pre>
-<code data-crate class="sql">
-select name, id from sys.cluster
-</code>
-</pre>
-<crate-result></crate-result>
+{
+  "ok" : true,
+  "status" : 200,
+  "name" : "Dent de Crolles",
+  "cluster_name" : "crate",
+  "version" : {
+    "number" : "0.57.0",
+    "build_hash" : "24de2d2b76fc39878ea662f551acbf52040b8c56",
+    "build_timestamp" : "2016-10-21T14:16:38Z",
+    "build_snapshot" : true,
+    "es_version" : "2.3.4",
+    "lucene_version" : "5.5.0"
+  }
+}```
 
 
 
 # Thanks!
-Visit us at https://crate.io
