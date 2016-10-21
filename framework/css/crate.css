@@ -52,7 +52,7 @@ body .reveal .white, body .reveal .white h2 {
 }
 .reveal .slides>section {
   background-color: rgba(61, 116, 255, 0.77);
-  padding: 40px 0px;
+  padding: 40px;
 }
 .reveal a, .reveal a:visited {
   color: #fff;
