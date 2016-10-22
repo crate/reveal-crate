@@ -8,7 +8,7 @@ November 2016
 
 # Implementation
 
-Redirection from / -> _plugin/crate-admin if browser user agent is:
+Redirection from `/` -> `_plugin/crate-admin` if browser user agent is:
 
 * `Mozilla/5.0`
 * `Mozilla/4.0`
@@ -28,12 +28,11 @@ Otherwise, returns JSON as before.
 # Demo with curl
 
 ```shell
-$ curl -i -H "Accept: application/json" "localhost:4200"
+$ curl -i "localhost:4200"
 
 HTTP/1.1 200 OK
 Content-Type: application/json; charset=UTF-8
 Content-Length: 339
-
 {
   "ok" : true,
   "status" : 200,
