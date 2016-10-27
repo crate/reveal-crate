@@ -8,12 +8,8 @@ November 2016
 
 # Implementation
 
-Redirection from `/` -> `_plugin/crate-admin` if browser user agent is:
-
-* `Mozilla/5.0`
-* `Mozilla/4.0`
-* `Opera`
-
+Redirection from `/` -> `_plugin/crate-admin` if a browser is detected, which is done
+via examining the browser's user agent.
 
 Otherwise, returns JSON as before.
 
@@ -21,7 +17,7 @@ Otherwise, returns JSON as before.
 
 # Demo in browser
 
-[localhost:4200](http://localhost:4200)
+[st1.p.fir.io:4200](st1.p.fir.io:4200)
 
 
 
