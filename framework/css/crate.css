@@ -43,8 +43,6 @@ body, .reveal {
   line-height: 1.2;
   letter-spacing: 0.02em;
   color: #FFF;
-  background-color: #ffffff;
-  background-image: url('../images/background.png');
   background-size: cover;
 }
 body .reveal .white, body .reveal .white h2 {
